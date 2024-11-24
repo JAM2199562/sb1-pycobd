@@ -11,4 +11,9 @@ export interface User {
   avatar: string;
   isOnline: boolean;
   lastSeen?: Date;
+  role?: string;
+  bio?: string;
+  location?: string;
+  joinDate: Date;
+  messageCount?: number;
 }

@@ -5,9 +5,10 @@ import type { Message } from '../types';
 interface ChatMessageProps {
   message: Message;
   isOwnMessage: boolean;
+  onUserClick: () => void;
 }
 
-export function ChatMessage({ message, isOwnMessage }: ChatMessageProps) {
+export function ChatMessage({ message, isOwnMessage, onUserClick }: ChatMessageProps) {
   return (
     <div className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'} mb-4`}>
       <div
@@ -19,7 +20,12 @@ export function ChatMessage({ message, isOwnMessage }: ChatMessageProps) {
       >
         <div className="flex items-baseline gap-2">
           {!isOwnMessage && (
-            <span className="text-sm font-semibold">{message.sender}</span>
+            <button
+              onClick={onUserClick}
+              className="text-sm font-semibold hover:underline focus:outline-none"
+            >
+              {message.sender}
+            </button>
           )}
           <span className="text-xs opacity-70">
             {format(message.timestamp, 'HH:mm')}

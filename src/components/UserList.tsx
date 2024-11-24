@@ -3,15 +3,20 @@ import { User } from '../types';
 
 interface UserListProps {
   users: User[];
+  onUserClick: (user: User) => void;
 }
 
-export function UserList({ users }: UserListProps) {
+export function UserList({ users, onUserClick }: UserListProps) {
   return (
     <div className="w-64 bg-gray-50 border-l border-gray-200 p-4">
       <h2 className="text-lg font-semibold mb-4">Online Users</h2>
       <div className="space-y-3">
         {users.map((user) => (
-          <div key={user.id} className="flex items-center gap-3">
+          <button
+            key={user.id}
+            onClick={() => onUserClick(user)}
+            className="flex items-center gap-3 w-full text-left hover:bg-gray-100 p-2 rounded-lg transition-colors"
+          >
             <div className="relative">
               <img
                 src={user.avatar}
@@ -30,7 +35,7 @@ export function UserList({ users }: UserListProps) {
                 {user.isOnline ? 'Online' : 'Offline'}
               </p>
             </div>
-          </div>
+          </button>
         ))}
       </div>
     </div>
